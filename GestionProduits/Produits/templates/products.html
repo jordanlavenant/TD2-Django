@@ -1,6 +1,13 @@
-<h1>Products</h1>
+{% extends 'base.html' %}
+<!-- prettier-ignore-start -->
+{% block content %}
 <ul>
   {% for product in products %}
-  <li><a href="{{ product.id }}">{{ product.name }}</a></li>
+  <li>
+    <a class="text-warning" href="{{ product.id }}">{{ product.name }}</a>
+  </li>
   {% endfor %}
 </ul>
+<a href="add">Ajouter un produit</a>
+{% endblock %}
+<!-- prettier-ignore-end -->
