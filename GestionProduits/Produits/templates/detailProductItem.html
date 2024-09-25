@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% block menu %}
+<h2>{{ titremenu }}</h2>
+{% endblock %}
+
+{% block content %}
+<a href="{% url 'product-list'%}">Retour à la liste des produits</a>
+<h2>{{ product.name }}</h2>
+<ul>
+<li>Code : {{ product.code }}</li>
+<li>Prix HT : {{ product.price_ht }}</li>
+<li>Prix TTC: {{ product.price_ttc }}</li>
+<li>Date de création : {{ product.date_creation }}</li>
+</ul>
+{% endblock %}

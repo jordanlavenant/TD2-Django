@@ -13,10 +13,28 @@
     {% endblock %}
   </head>
   <body>
+    <nav class="navbar navbar-expand-md navbar-dark bg-dark mb-4">
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'product-list' %}">Product</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'productitem-list' %}">ProductItem</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'productattribute-list' %}">ProductAttribute</a>
+          </li>
+        </ul>
+      </div>
+    </nav >
     <header>
       <h1>Gestion Produits</h1>
     </header>
-    <main>{% block content %} {% endblock %}</main>
+    <main>
+      {% block menu %} {% endblock %}
+      {% block content %} {% endblock %}
+    </main>
     <footer>
       <p>© 2021 Gestion Produits</p>
     </footer>

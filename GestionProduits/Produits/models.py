@@ -12,7 +12,7 @@ PRODUCT_STATUS = (
 class Status(models.Model):
     numero  = models.IntegerField()
     libelle = models.CharField(max_length=100)
-          
+
     def __str__(self):
         return "{0} {1}".format(self.numero, self.libelle)
     
@@ -44,7 +44,7 @@ class ProductItem(models.Model):
     code    = models.CharField(max_length=10, null=True, blank=True, unique=True)
     product = models.ForeignKey('Product', on_delete=models.CASCADE)
     attributes  = models.ManyToManyField("ProductAttributeValue", related_name="product_item", null=True, blank=True)
-       
+
     def __str__(self):
         return "{0} {1}".format(self.color, self.code)
     
@@ -73,6 +73,6 @@ class ProductAttributeValue(models.Model):
     value              = models.CharField(max_length=100)
     product_attribute  = models.ForeignKey('ProductAttribute', verbose_name="Unité", on_delete=models.CASCADE)
     position           = models.PositiveSmallIntegerField("Position", null=True, blank=True)
-     
+
     def __str__(self):
         return "{0} [{1}]".format(self.value, self.product_attribute)
