@@ -3,10 +3,16 @@ from . import views
 from django.views.generic import *
 
 urlpatterns = [
-    path('home', views.HomeView.as_view(template_name='home.html')),
-    path('home/<param>', views.HomeView.as_view(template_name='home.html')),
-    path('about', views.AboutView.as_view(template_name='home.html')),
-    path('contact', views.ContactView.as_view(template_name='home.html')),
+    path('home', views.HomeView.as_view(template_name='home.html'), name="home"),
+    path('home/<param>', views.HomeView.as_view(template_name='home.html'), name="home"),
+    path('about', views.AboutView.as_view(template_name='home.html'), name="about"),
+    path('contact', views.ContactView, name="contact"),
+    path('email-sent', views.EmailSentView, name="email-sent"),
+
+    # Login / Logout
+    path('login/', views.ConnectView.as_view(), name="login"),
+    path('register/', views.RegisterView.as_view(), name="register"),
+    path('logout/', views.DisconnectView.as_view(), name="logout"),
 
     # Product
     path("products",views.ProductListView.as_view(), name="product-list"),

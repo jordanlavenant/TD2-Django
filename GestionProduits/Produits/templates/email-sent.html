@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container mt-4">
+    <div class="alert alert-success" role="alert">
+        <h1>{{ titreh1 }}</h1>
+        <p>Votre email a été envoyé avec succès. Nous vous répondrons dès que possible.</p>
+        <a href="{% url 'contact' %}" class="btn btn-primary mt-3">Envoyer un autre email</a>
+    </div>
+</div>
+{% endblock %}

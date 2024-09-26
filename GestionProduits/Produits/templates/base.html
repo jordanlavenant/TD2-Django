@@ -25,18 +25,30 @@
           <li class="nav-item">
             <a class="nav-link" href="{% url 'productattribute-list' %}">ProductAttribute</a>
           </li>
+          {% if user.is_authenticated %}
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'logout' %}">Déconnexion</a>
+            </li>
+          {%else%}
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'login' %}">Connexion</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'register' %}">Inscription</a>
+            </li>
+          {%endif%}
         </ul>
       </div>
     </nav >
     <header>
-      <h1>Gestion Produits</h1>
+      <!-- <h1>Gestion Produits</h1> -->
     </header>
     <main>
       {% block menu %} {% endblock %}
       {% block content %} {% endblock %}
     </main>
     <footer>
-      <p>© 2021 Gestion Produits</p>
+      <p>© 2024 Gestion Produits</p>
     </footer>
   </body>
 </html>
