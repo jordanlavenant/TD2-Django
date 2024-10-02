@@ -30,7 +30,8 @@ class Product(models.Model):
     price_ht      = models.DecimalField(max_digits=8, decimal_places=2,  null=True, blank=True, verbose_name="Prix unitaire HT")
     price_ttc     = models.DecimalField(max_digits=8, decimal_places=2,  null=True, blank=True, verbose_name="Prix unitaire TTC")
     status        = models.SmallIntegerField(choices=PRODUCT_STATUS, default=0)
-    date_creation =  models.DateTimeField(blank=True, verbose_name="Date création") 
+    # date_creation =  models.DateTimeField(blank=True, verbose_name="Date création") 
+    date_creation =  models.DateTimeField(blank=True, verbose_name="Date création", default=timezone.now()) 
     
     def __str__(self):
         return "{0} {1}".format(self.name, self.code)

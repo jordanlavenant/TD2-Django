@@ -15,8 +15,11 @@ urlpatterns = [
     path('logout/', views.DisconnectView.as_view(), name="logout"),
 
     # Product
-    path("products",views.ProductListView.as_view(), name="product-list"),
-    path("products/<pk>",views.ProductDetailView.as_view(), name="product-detail"),
+    path("product",views.ProductListView.as_view(), name="product-list"),
+    path("product/<pk>",views.ProductDetailView.as_view(), name="product-detail"),
+    path("product/add/",views.ProductCreateView.as_view(), name="product-add"),
+    path("product/<pk>/update/",views.ProductUpdateView.as_view(), name="product-update"),
+    path("product/<pk>/delete/",views.ProductDeleteView.as_view(), name="product-delete"),
 
     # Product Item
     path("productsitem",views.ProductItemListView.as_view(), name="productitem-list"),

@@ -2,7 +2,7 @@ from typing import Any
 from django.db.models.query import QuerySet
 from django.shortcuts import render
 
-from .forms import ContactUsForm
+from .forms import ContactUsForm, ProductForm, ProductAttributeForm, ProductItemForm
 from .models import Product, ProductItem, ProductAttribute
 from django.views.generic import *
 from django.contrib.auth.views import LoginView
@@ -10,6 +10,8 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
 from django.core.mail import send_mail
 from django.shortcuts import redirect
+from django.forms.models import BaseModelForm
+from django.urls import reverse_lazy
 
 # Create your views here.
 
@@ -120,6 +122,29 @@ class ProductDetailView(DetailView):
     context['titremenu'] = "Détail Product"
     return context
   
+class ProductCreateView(CreateView):
+  model = Product
+  form_class=ProductForm
+  template_name = "new-product.html"
+
+  def form_valid(self, form: BaseModelForm):
+    product = form.save()
+    return redirect('product-detail', product.id)
+
+class ProductUpdateView(UpdateView):
+  model = Product
+  form_class=ProductForm
+  template_name = "update-product.html"
+
+  def form_valid(self, form: BaseModelForm):
+    product = form.save()
+    return redirect('product-detail', product.id)
+
+class ProductDeleteView(DeleteView):
+  model = Product
+  template_name = "delete-product.html"
+  success_url = reverse_lazy('product-list')
+
 # Product Item
 
 class ProductItemListView(ListView):

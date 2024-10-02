@@ -1,11 +1,10 @@
 {% extends 'base.html' %}
-{% block menu %}
-<h2>{{ titremenu }}</h2>
-{% endblock %}
 
 {% block content %}
 <div class="container mt-4">
     <a href="{% url 'product-list' %}" class="btn btn-primary mb-3">Retour à la liste des produits</a>
+    <a href="{% url 'product-update' product.id %}" class="btn btn-warning mb-3">Modifier le produit</a>
+    <a href="{% url 'product-delete' product.id %}" class="btn btn-danger mb-3">Supprimer le produit</a>
     <h2 class="display-5">{{ product.name }}</h2>
     <ul class="list-group">
         <li class="list-group-item"><strong>Code :</strong> {{ product.code }}</li>
