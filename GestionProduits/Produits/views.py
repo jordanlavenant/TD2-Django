@@ -6,12 +6,14 @@ from .forms import ContactUsForm, ProductForm, ProductAttributeForm, ProductItem
 from .models import Product, ProductItem, ProductAttribute, ProductAttributeValue
 from django.views.generic import *
 from django.contrib.auth.views import LoginView
+from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
 from django.core.mail import send_mail
 from django.shortcuts import redirect
 from django.forms.models import BaseModelForm
 from django.urls import reverse_lazy
+from django.utils.decorators import method_decorator
 
 # Create your views here.
 
@@ -173,6 +175,7 @@ class ProductItemDetailView(DetailView):
   
 # Product Attribute
 
+@method_decorator(login_required, name='dispatch')
 class ProductAttributeListView(ListView):
   model = ProductAttribute
   template_name = "productsAttribute/productsAttribute.html"

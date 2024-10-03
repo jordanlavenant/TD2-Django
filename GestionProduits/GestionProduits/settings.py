@@ -79,6 +79,8 @@ INTERNAL_IPS = [
     '127.0.0.1',
 ]
 
+LOGIN_URL = '/product/login/'
+
 # Database
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
 
