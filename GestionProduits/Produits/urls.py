@@ -22,10 +22,12 @@ urlpatterns = [
     path("product/<pk>/delete/",views.ProductDeleteView.as_view(), name="product-delete"),
 
     # Product Item
-    path("productsitem",views.ProductItemListView.as_view(), name="productitem-list"),
-    path("productsitem/<pk>",views.ProductItemDetailView.as_view(), name="productitem-detail"),
+    # path("productsitem",views.ProductItemListView.as_view(), name="productitem-list"),
+    # path("productsitem/<pk>",views.ProductItemDetailView.as_view(), name="productitem-detail"),
 
     # Product Attribute
     path("productsattribute",views.ProductAttributeListView.as_view(), name="productattribute-list"),
     path("productsattribute/<pk>",views.ProductAttributeDetailView.as_view(), name="productattribute-detail"),
+    path("productsattribute/<pk>",views.ProductAttributeDetailView.as_view(), name="productattribute-update"),
+    path("productsattribute/<pk>",views.ProductAttributeDetailView.as_view(), name="productattribute-delete"),
 ]

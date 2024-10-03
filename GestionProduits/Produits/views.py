@@ -3,7 +3,7 @@ from django.db.models.query import QuerySet
 from django.shortcuts import render
 
 from .forms import ContactUsForm, ProductForm, ProductAttributeForm, ProductItemForm
-from .models import Product, ProductItem, ProductAttribute
+from .models import Product, ProductItem, ProductAttribute, ProductAttributeValue
 from django.views.generic import *
 from django.contrib.auth.views import LoginView
 from django.contrib.auth import authenticate, login, logout
@@ -90,16 +90,15 @@ def ContactView(request):
       return redirect("email-sent")
   else:
     form = ContactUsForm()
-  return render(request, "contact.html", {'titreh1':titreh1, 'form':form})
+  return render(request, "contact/contact.html", {'titreh1':titreh1, 'form':form})
 
 def EmailSentView(request):
-  return render(request, "email-sent.html", {'titreh1':"Email sent"})
+  return render(request, "contact/email-sent.html", {'titreh1':"Email sent"})
 
 # Product  
-
 class ProductListView(ListView):
   model = Product
-  template_name = "products.html"
+  template_name = "products/products.html"
   context_object_name = "products"
   queryset = Product.objects.all()
 
@@ -114,7 +113,7 @@ class ProductListView(ListView):
   
 class ProductDetailView(DetailView):
   model = Product
-  template_name = "detailProduct.html"
+  template_name = "products/detailProduct.html"
   context_object_name = "product"
 
   def get_context_data(self, **kwargs):
@@ -125,7 +124,7 @@ class ProductDetailView(DetailView):
 class ProductCreateView(CreateView):
   model = Product
   form_class=ProductForm
-  template_name = "new-product.html"
+  template_name = "products/new-product.html"
 
   def form_valid(self, form: BaseModelForm):
     product = form.save()
@@ -134,7 +133,7 @@ class ProductCreateView(CreateView):
 class ProductUpdateView(UpdateView):
   model = Product
   form_class=ProductForm
-  template_name = "update-product.html"
+  template_name = "products/update-product.html"
 
   def form_valid(self, form: BaseModelForm):
     product = form.save()
@@ -142,14 +141,14 @@ class ProductUpdateView(UpdateView):
 
 class ProductDeleteView(DeleteView):
   model = Product
-  template_name = "delete-product.html"
+  template_name = "products/delete-product.html"
   success_url = reverse_lazy('product-list')
 
 # Product Item
 
 class ProductItemListView(ListView):
   model = ProductItem
-  template_name = "productsItem.html"
+  template_name = "productsItem/productsItem.html"
   context_object_name = "products"
   queryset = ProductItem.objects.all()
 
@@ -164,7 +163,7 @@ class ProductItemListView(ListView):
   
 class ProductItemDetailView(DetailView):
   model = ProductItem
-  template_name = "detailProductItem.html"
+  template_name = "productsItem/detailProductItem.html"
   context_object_name = "product"
 
   def get_context_data(self, **kwargs):
@@ -176,25 +175,24 @@ class ProductItemDetailView(DetailView):
 
 class ProductAttributeListView(ListView):
   model = ProductAttribute
-  template_name = "productsAttribute.html"
-  context_object_name = "products"
-  queryset = ProductAttribute.objects.all()
+  template_name = "productsAttribute/productsAttribute.html"
+  context_object_name = "productattributes"
 
-  def get_queryset(self):
+  def get_queryset(self ):
     return ProductAttribute.objects.all()
   
   def get_context_data(self, **kwargs):
     context = super(ProductAttributeListView, self).get_context_data(**kwargs)
-    context['titremenu'] = "Liste des Products Attribute"
-    context['products'] = self.get_queryset()
+    context['titremenu'] = "Liste des attributs"
     return context
   
 class ProductAttributeDetailView(DetailView):
-  model = Product
-  template_name = "detailProductAttribute.html"
-  context_object_name = "product"
+  model = ProductAttribute
+  template_name = "productsAttribute/detailProductAttribute.html"
+  context_object_name = "productattribute"
 
   def get_context_data(self, **kwargs):
     context = super(ProductAttributeDetailView, self).get_context_data(**kwargs)
-    context['titremenu'] = "Détail Product Attribute"
+    context['titremenu'] = "Détail attribut"
+    context['values']=ProductAttributeValue.objects.filter(product_attribute=self.object).order_by('position')
     return context
